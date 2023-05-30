@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"errors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/hidayatarg/go-crud/initalizers"
 	"github.com/hidayatarg/go-crud/models"
+	"gorm.io/gorm"
 )
 
 func PostsCreate(c *gin.Context) {
@@ -57,7 +60,15 @@ func PostsSingleById(c *gin.Context) {
 
 	// read data from db
 	var post models.Post
-	initalizers.DB.First(&post, id) // finding the posts and assigning them to posts array
+	result := initalizers.DB.First(&post, id) // finding the posts and assigning them to posts array
+	err := result.Error
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		c.JSON(200, gin.H{
+			"error": "Not found error",
+		})
+		return
+	}
 
 	// return response
 	c.JSON(200, gin.H{
