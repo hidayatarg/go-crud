@@ -27,5 +27,9 @@ func main() {
 	r.GET("/posts/:id", controllers.PostsSingleById)
 
 	r.DELETE("/posts/:id", controllers.PostsDeleteById)
+
+	// authentication
+	r.POST("/signup", controllers.Signup)
+
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
