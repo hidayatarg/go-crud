@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/hidayatarg/go-crud/initalizers"
-	"github.com/hidayatarg/go-crud/models"
 )
 
 func init() {
@@ -11,5 +10,6 @@ func init() {
 }
 
 func main() {
-	initalizers.DB.AutoMigrate(&models.Post{})
+	initalizers.SyncDatabase()
+	// moved the db initalization to sync database
 }
