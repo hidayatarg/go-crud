@@ -96,7 +96,7 @@ func Login(c *gin.Context) {
 	// generate a jwt token and send it
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24).Unix(),
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
 	})
 
 	// Sign and get the complete encoded token as a string using the secret
@@ -111,7 +111,10 @@ func Login(c *gin.Context) {
 	}
 
 	// send token
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
+
 	c.JSON(http.StatusOK, gin.H{
-		"token": tokenString,
+		// "token": tokenString,
 	})
 }
