@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hidayatarg/go-crud/controllers"
 	"github.com/hidayatarg/go-crud/initalizers"
 )
 
@@ -18,10 +19,7 @@ func main() {
 	fmt.Println("It is working")
 
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/", controllers.Ping)
+	r.POST("/create", controllers.PostCreate)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

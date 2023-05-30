@@ -39,3 +39,7 @@ to make auto `db.AutoMigrate(&Product{})` visit link https://gorm.io/docs/index.
 
 as migrate/migrate.go is created run the migration using
 `go run migrate/migrate.go` , It will create the posts table in the database.
+
+## Create Record
+
+visit link https://gorm.io/docs/create.html for Go ORM
