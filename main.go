@@ -2,20 +2,14 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	"github.com/hidayatarg/go-crud/initalizers"
 )
 
 // init -> run before main
-
 func init() {
-	// load environment variables
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading environment variables")
-	}
+	initalizers.LoadEnvVariables()
 
 }
 
