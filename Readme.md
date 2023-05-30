@@ -1,3 +1,5 @@
+# Go GIN Web API
+
 ## Initalization
 
 `go mod init` creating a go mod file (like a node file for nodejs projects)
