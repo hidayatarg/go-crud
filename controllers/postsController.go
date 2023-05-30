@@ -38,3 +38,29 @@ func Ping(c *gin.Context) {
 		"message": "pong",
 	})
 }
+
+func PostsIndex(c *gin.Context) {
+	// read data from db
+	var posts []models.Post
+	initalizers.DB.Find(&posts) // finding the posts and assigning them to posts array
+
+	// return response
+	c.JSON(200, gin.H{
+		"posts": posts,
+	})
+}
+
+func PostsSingleById(c *gin.Context) {
+
+	// Get Id from url
+	id := c.Param("id")
+
+	// read data from db
+	var post models.Post
+	initalizers.DB.First(&post, id) // finding the posts and assigning them to posts array
+
+	// return response
+	c.JSON(200, gin.H{
+		"post": post,
+	})
+}
