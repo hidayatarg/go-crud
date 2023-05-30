@@ -30,6 +30,7 @@ func main() {
 
 	// authentication
 	r.POST("/signup", controllers.Signup)
+	r.POST("/login", controllers.Login)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
