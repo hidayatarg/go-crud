@@ -8,7 +8,16 @@ import (
 
 func PostsCreate(c *gin.Context) {
 	// get data from request body
-	post := models.Post{Title: "Hello", Body: "Post Body"}
+
+	var body struct {
+		Body  string
+		Title string
+	}
+
+	c.Bind(&body)
+
+	// creat post
+	post := models.Post{Title: body.Title, Body: body.Body}
 
 	// add to table
 	result := initalizers.DB.Create(&post) // pass pointer of data to Create
