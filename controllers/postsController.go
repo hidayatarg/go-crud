@@ -75,3 +75,31 @@ func PostsSingleById(c *gin.Context) {
 		"post": post,
 	})
 }
+
+func PostsUpdateById(c *gin.Context) {
+	// Get Id from url
+	id := c.Param("id")
+
+	// get data from request body
+	var body struct {
+		Body  string
+		Title string
+	}
+
+	c.Bind(&body)
+
+	// find post we want to update
+	var post models.Post
+	initalizers.DB.First(&post, id)
+
+	// update
+	initalizers.DB.Model(&post).Updates(models.Post{
+		Title: body.Title,
+		Body:  body.Body,
+	})
+
+	// return response
+	c.JSON(200, gin.H{
+		"post": post,
+	})
+}
