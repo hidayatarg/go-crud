@@ -103,3 +103,26 @@ func PostsUpdateById(c *gin.Context) {
 		"post": post,
 	})
 }
+
+func PostsDeleteById(c *gin.Context) {
+	// Get Id from url
+	id := c.Param("id")
+
+	// Get the post from db
+	var post models.Post
+	result := initalizers.DB.First(&post, id)
+	err := result.Error
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		c.JSON(200, gin.H{
+			"error": "Not found error",
+		})
+		return
+	}
+
+	// if it is avalibale Delete
+	initalizers.DB.Delete(&models.Post{}, id)
+
+	// response
+	c.Status(200)
+}
