@@ -6,7 +6,7 @@ import (
 	"github.com/hidayatarg/go-crud/models"
 )
 
-func PostCreate(c *gin.Context) {
+func PostsCreate(c *gin.Context) {
 	// get data from request body
 	post := models.Post{Title: "Hello", Body: "Post Body"}
 

@@ -20,6 +20,6 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/", controllers.Ping)
-	r.POST("/create", controllers.PostCreate)
+	r.POST("/create", controllers.PostsCreate)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
