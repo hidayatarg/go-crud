@@ -14,3 +14,28 @@
 ## Running Development Server
 
 `CompileDaemon -command="./go-crud"` Run the Daemon and given the package name
+
+## Declaring Models
+
+https://gorm.io/docs/models.html visit the link to see how to declare your models.
+we are using the following model
+
+```go
+
+type User struct {
+  gorm.Model
+  Name string
+}
+// equals
+type User struct {
+  ID        uint           `gorm:"primaryKey"`
+  CreatedAt time.Time
+  UpdatedAt time.Time
+  DeletedAt gorm.DeletedAt `gorm:"index"`
+  Name string
+```
+
+to make auto `db.AutoMigrate(&Product{})` visit link https://gorm.io/docs/index.html
+
+as migrate/migrate.go is created run the migration using
+`go run migrate/migrate.go` , It will create the posts table in the database.
