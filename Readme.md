@@ -1,10 +1,21 @@
-# Go GIN Web API
+# Go Web API
+
+This a template of GoLang Web API, using the Gin framework and Go ORM with PostgreSQL Database.
+
+By Hidayat Arghandabi 2023
+
+## How to use this template
+
+1. Update DB Connection String in the .env file
+2. Create migration located in migrate/migrate.go using `go run migrate/migrate.go`. It will create the posts and users table in the database.
+3. You can run the project from main.go using the vscode debugger or `CompileDaemon -command="./go-crud"` the Daemon tool, make sure it is installed.
+4. Enjoy this project
 
 ## Initalization
 
 `go mod init` creating a go mod file (like a node file for nodejs projects)
 
-## Packages
+## Required Packages
 
 1.  `go get github.com/githubnemo/CompileDaemon` and install so that can be run as command-line tool `go install github.com/githubnemo/CompileDaemon` watch files for changes and rebuild
 2.  `go get github.com/joho/godotenv` Easy to load environment variables
@@ -45,6 +56,6 @@ to make auto `db.AutoMigrate(&Product{})` visit link https://gorm.io/docs/index.
 as migrate/migrate.go is created run the migration using
 `go run migrate/migrate.go` , It will create the posts table in the database.
 
-## Create Record
+## Go ORM Create
 
 visit link https://gorm.io/docs/create.html for Go ORM
