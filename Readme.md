@@ -4,7 +4,11 @@ This a template of GoLang Web API, using the Gin framework and Go ORM with Postg
 
 By Hidayat Arghandabi 2023
 
-## How to use this template
+## How to run using docker container
+
+Run the `docker-compose up` command
+
+## How to run/use this template without docker containers
 
 1. Update DB Connection String in the .env file
 2. Create migration located in migrate/migrate.go using `go run migrate/migrate.go`. It will create the posts and users table in the database.
