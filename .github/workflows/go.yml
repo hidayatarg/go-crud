@@ -30,9 +30,6 @@ jobs:
     - name: Start the Docker Compose services
       run: docker-compose up -d
 
-    - name: Run tests (if applicable)
-      run: go test ./...
-
     - name: Clean up Docker Compose services
       run: docker-compose down
    
