@@ -62,3 +62,33 @@ func RequireAuth(c *gin.Context) {
 	}
 
 }
+
+func RequireAdmin(c *gin.Context) {
+	user, _ := c.Get("user")
+
+	if user.(models.User).Role != "admin" {
+		c.AbortWithStatus(http.StatusUnauthorized)
+	}
+
+	c.Next()
+}
+
+func RequireMember(c *gin.Context) {
+	user, _ := c.Get("user")
+
+	if user.(models.User).Role != "member" {
+		c.AbortWithStatus(http.StatusUnauthorized)
+	}
+
+	c.Next()
+}
+
+func RequireAdminOrMember(c *gin.Context) {
+	user, _ := c.Get("user")
+
+	if user.(models.User).Role != "member" && user.(models.User).Role != "admin" {
+		c.AbortWithStatus(http.StatusUnauthorized)
+	}
+
+	c.Next()
+}
