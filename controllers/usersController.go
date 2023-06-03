@@ -14,10 +14,7 @@ import (
 
 func Signup(c *gin.Context) {
 	// get email and password from request body
-	var body struct {
-		Email    string
-		Password string
-	}
+	var body models.UserRequest
 
 	if c.Bind(&body) == nil {
 		models.ReturnGenericBadResponse(c, "Invalid request body 1")
@@ -52,10 +49,7 @@ func Signup(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	// get email and password from request body
-	var body struct {
-		Email    string
-		Password string
-	}
+	var body models.UserRequest
 
 	if c.Bind(&body) != nil {
 		models.ReturnGenericBadResponse(c, "Invalid request body")
