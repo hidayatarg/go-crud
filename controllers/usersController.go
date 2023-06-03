@@ -19,11 +19,13 @@ func Signup(c *gin.Context) {
 		Password string
 	}
 
-	if c.Bind(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid request body",
-		})
+	if c.Bind(&body) == nil {
+		models.ReturnGenericBadResponse(c, "Invalid request body 1")
+		return
+	}
 
+	if (body.Email == "") || (body.Password == "") {
+		models.ReturnGenericBadResponse(c, "Email and Password cannot be empty")
 		return
 	}
 
@@ -31,10 +33,7 @@ func Signup(c *gin.Context) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to hash password",
-		})
-
+		models.ReturnGenericBadResponse(c, "Failed to hash password")
 		return
 	}
 	// create user
@@ -43,15 +42,12 @@ func Signup(c *gin.Context) {
 	result := initalizers.DB.Create(&user)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to create user",
-		})
-
+		models.ReturnGenericBadResponse(c, "Failed to create user")
 		return
 	}
 
 	// return response
-	c.JSON(http.StatusOK, gin.H{})
+	models.ReturnGenericSuccessWithNoMessageResponse(c)
 }
 
 func Login(c *gin.Context) {
@@ -62,10 +58,12 @@ func Login(c *gin.Context) {
 	}
 
 	if c.Bind(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid request body",
-		})
+		models.ReturnGenericBadResponse(c, "Invalid request body")
+		return
+	}
 
+	if (body.Email == "") || (body.Password == "") {
+		models.ReturnGenericBadResponse(c, "Email and Password cannot be empty")
 		return
 	}
 
@@ -75,10 +73,7 @@ func Login(c *gin.Context) {
 
 	if user.ID == 0 {
 		// didnt find user
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid email or password",
-		})
-
+		models.ReturnGenericBadResponse(c, "Invalid email or password")
 		return
 	}
 
@@ -86,10 +81,7 @@ func Login(c *gin.Context) {
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid email or password",
-		})
-
+		models.ReturnGenericBadResponse(c, "Invalid email or password")
 		return
 	}
 
@@ -103,10 +95,7 @@ func Login(c *gin.Context) {
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to create token",
-		})
-
+		models.ReturnGenericBadResponse(c, "Failed to create token")
 		return
 	}
 
@@ -114,15 +103,14 @@ func Login(c *gin.Context) {
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 
-	c.JSON(http.StatusOK, gin.H{
-		// "token": tokenString,
-	})
+	// c.JSON(http.StatusOK, gin.H{
+	// 	// "token": tokenString,
+	// })
+	models.ReturnGenericSuccessWithNoMessageResponse(c)
 }
 
 func Validate(c *gin.Context) {
 	user, _ := c.Get("user")
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": user.(models.User).Email,
-	})
+	models.ReturnGenericSuccessWithMessageResponse(c, nil, user.(models.User).Email)
 }
