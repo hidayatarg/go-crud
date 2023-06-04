@@ -12,8 +12,9 @@ Run the `docker-compose up` command
 
 1. Update DB Connection String in the .env file
 2. Create migration located in migrate/migrate.go using `go run migrate/migrate.go`. It will create the posts and users table in the database.
-3. You can run the project from main.go using the vscode debugger or `CompileDaemon -command="./go-crud"` the Daemon tool, make sure it is installed.
-4. Enjoy this project
+3. Install packages `go mod tidy`
+4. You can run the project from main.go using the vscode debugger or `CompileDaemon -command="./go-crud"` the Daemon tool, make sure it is installed.
+5. Enjoy this project
 
 ## Initalization
 
