@@ -4,6 +4,17 @@ This a template of GoLang Web API, using the Gin framework and Go ORM with Postg
 
 By Hidayat Arghandabi 2023
 
+#### Implementations
+Last Update 06/19/2023
+- HTTP Request
+- Authorization and Authentication
+- Middleware (Auth, Logger) 
+- PostgreSQL DB
+- Containerization
+- .env
+- Migration
+
+
 ## How to run using docker container
 
 Run the `docker-compose up` command
@@ -22,7 +33,7 @@ Run the `docker-compose up` command
 
 ## Required Packages
 
-1.  `go get github.com/githubnemo/CompileDaemon` and install so that can be run as command-line tool `go install github.com/githubnemo/CompileDaemon` watch files for changes and rebuild
+1.  `go get github.com/githubnemo/CompileDaemon` and install it, so that it can be run as command-line tool `go install github.com/githubnemo/CompileDaemon` watch files for changes and rebuild
 2.  `go get github.com/joho/godotenv` Easy to load environment variables
 3.  `go get -u github.com/gin-gonic/gin` Gin Framework for Http Server
 4.  `go get -u gorm.io/gorm` and `go get -u gorm.io/driver/postgres` Go ORM Library for Go
@@ -60,8 +71,8 @@ type User struct {
 to make auto `db.AutoMigrate(&Product{})` visit link https://gorm.io/docs/index.html
 
 as migrate/migrate.go is created run the migration using
-`go run migrate/migrate.go` , It will create the posts table in the database.
+`go run migrate/migrate.go`, It will make the posts table in the database.
 
 ## Go ORM Create
 
-visit link https://gorm.io/docs/create.html for Go ORM
+visit the link https://gorm.io/docs/create.html for Go ORM
