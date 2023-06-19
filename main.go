@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hidayatarg/go-crud/configurations"
 	"github.com/hidayatarg/go-crud/controllers"
 	"github.com/hidayatarg/go-crud/initalizers"
 	"github.com/hidayatarg/go-crud/middlewares"
@@ -13,6 +14,8 @@ import (
 func init() {
 	initalizers.LoadEnvVariables()
 	initalizers.ConnectToDatabase()
+	// initialize logger
+	configurations.SetupLogger()
 }
 
 func main() {
@@ -20,6 +23,10 @@ func main() {
 	fmt.Println("It is working")
 
 	r := gin.Default()
+
+	// Use the RequestLogger middleware
+	r.Use(middlewares.RequestLogger())
+
 	r.GET("/", controllers.Ping)
 	r.POST("/Posts", controllers.PostsCreate)
 	r.PUT("/posts/:id", controllers.PostsUpdateById)
