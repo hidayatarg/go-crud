@@ -26,6 +26,7 @@ Run the `docker-compose up` command
 2.  `go get github.com/joho/godotenv` Easy to load environment variables
 3.  `go get -u github.com/gin-gonic/gin` Gin Framework for Http Server
 4.  `go get -u gorm.io/gorm` and `go get -u gorm.io/driver/postgres` Go ORM Library for Go
+5.  `go get -u github.com/sirupsen/logrus` Package for logging in a Gin application
 
 #### for JWT authentication
 
