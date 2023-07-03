@@ -5,15 +5,16 @@ This a template of GoLang Web API, using the Gin framework and Go ORM with Postg
 By Hidayat Arghandabi 2023
 
 #### Implementations
+
 Last Update 06/19/2023
+
 - HTTP Request
 - Authorization and Authentication
-- Middleware (Auth, Logger) 
+- Middleware (Auth, Logger)
 - PostgreSQL DB
 - Containerization
 - .env
 - Migration
-
 
 ## How to run using docker container
 
@@ -76,3 +77,7 @@ as migrate/migrate.go is created run the migration using
 ## Go ORM Create
 
 visit the link https://gorm.io/docs/create.html for Go ORM
+
+## Important Commands
+
+- `docker-compose up --build`
