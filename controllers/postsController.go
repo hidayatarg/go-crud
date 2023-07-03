@@ -50,7 +50,7 @@ func SetRedisValue(client *redis.Client, key string, value string) error {
 	return nil
 }
 
-func GetRedisValue(client *redis.Client, key string, result interface{}) error {
+func GetRedisValue(client *redis.Client, key string, result interface{}) interface{} {
 	ctx := context.Background()
 
 	jsonValue, err := client.Get(ctx, key).Bytes()
@@ -63,7 +63,7 @@ func GetRedisValue(client *redis.Client, key string, result interface{}) error {
 		return err
 	}
 
-	return nil
+	return result
 }
 
 func Ping(c *gin.Context) {
