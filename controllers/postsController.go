@@ -1,11 +1,14 @@
 package controllers
 
 import (
+	"context"
+	"encoding/json"
 	"errors"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hidayatarg/go-crud/initalizers"
 	"github.com/hidayatarg/go-crud/models"
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
@@ -34,6 +37,33 @@ func PostsCreate(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"posts": post,
 	})
+}
+
+func SetRedisValue(client *redis.Client, key string, value string) error {
+	ctx := context.Background()
+	err := client.Set(ctx, key, value, 0).Err()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func GetRedisValue(client *redis.Client, key string, result interface{}) error {
+	ctx := context.Background()
+
+	jsonValue, err := client.Get(ctx, key).Bytes()
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(jsonValue, result)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func Ping(c *gin.Context) {
